@@ -20,8 +20,9 @@ public class Dialogues : MonoBehaviour
     private GameObject _choiceButton;
     private List<TextMeshProUGUI> _choicesText = new();
     private List<Character> characters = new();
+    private List<Locations> locations = new();
     private float multiplier = 1.1f;
-
+    private Stack<string> _dialogueHistory = new Stack<string>();
     public bool DialogPlay { get; private set; }
     [Inject]
     public void Construct(DialoguesInstaller dialoguesInstaller)
@@ -43,7 +44,12 @@ public class Dialogues : MonoBehaviour
         {
             characters.Add(character);
         }
+        foreach (var location in FindObjectsOfType<Locations>())
+        {
+            locations.Add(location);
+        }
         StartDialogue();
+
     }
     public void StartDialogue()
     {
@@ -63,12 +69,36 @@ public class Dialogues : MonoBehaviour
             ExitDialogue();
         }
     }
+    public void GoBackDialogue()
+    {
+        if (_dialogueHistory.Count > 0)
+        {
+            _currentStory.state.LoadJson(_dialogueHistory.Pop());
+            ShowDialogue();
+            ShowChoiceButtons();
+        }
+        else
+        {
+            Debug.Log("Нельзя вернуться назад.");
+        }
+    }
     private void ShowDialogue()
     {
+        string currentDialogueState = _currentStory.state.ToJson();
+        _dialogueHistory.Push(currentDialogueState);
         _dialogueText.text = _currentStory.Continue();
         _nameText.text = (string)_currentStory.variablesState["characterName"];
         var index = characters.FindIndex(character => character.characterName.Contains(_nameText.text));
         characters[index].ChangeEmotion((int)_currentStory.variablesState["characterExpression"]);
+        // Получаем значение переменной "Location" из истории
+        int locationValue = (int)_currentStory.variablesState["Location"];
+
+        // Применяем значение "Location" к объекту Locations
+        foreach (var location in locations)
+        {
+            // Предполагается, что у объекта Locations есть свойство или метод, который позволяет применить новое состояние на основе значения "Location"
+            location.ChangeLocation(locationValue);
+        }
         ChangeCharacterScale(index);
     }
     private void ChangeCharacterScale(int indexCharacter)

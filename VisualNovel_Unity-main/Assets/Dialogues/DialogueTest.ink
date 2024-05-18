@@ -4,8 +4,8 @@ VAR characterExpression = 0
 
 Привет, как дела?
 ~characterExpression = 1
-Давай я расскажу тебе историю
-о себе
+Привет, как дела?1
+Привет, как дела?2
 ~characterName = "Bel"
 Привет, как дела?3
 ~characterExpression = 2
