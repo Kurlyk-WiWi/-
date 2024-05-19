@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,21 +9,27 @@ namespace Labirinth
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private Human human;
         public TMP_Text str;
         public TMP_Dropdown countcycle;
         public TMP_Dropdown funcarg1, funcarg2;
-        public Rigidbody2D human;
+        public Rigidbody2D field;
         //текст до введённых игроком команд
         public string basic;
-        public int maxstr = 13;
+        public int maxstr = 13, maxcode;
         public int countstr, countc;
         public int func1, func2;
+        public List <Command> commands;
+        public List<Command> cycle;
+
         // Start is called before the first frame update
         void Start()
         {
             basic = ""; countstr = 0;
-            countc = 0;
+            countc = 0; 
             func1 = 0; func2 = 0;
+            commands = new List <Command>();
+            cycle = new List <Command>();
         }
         void Update()
         {
@@ -34,6 +41,7 @@ namespace Labirinth
             {
                 cyclebasic += "        y++; //шаг вверх \n";
                 CycleStr.text = cyclebefore + cyclebasic + "    }";
+                cycle.Add(Command.up);
                 return;
             }
             if (countstr >= maxstr)
@@ -41,7 +49,7 @@ namespace Labirinth
             countstr++;
             basic += "    y++; //шаг вверх \n";
             str.text = basic;
-            Debug.Log("y++; //шаг вверх");
+            commands.Add(Command.up);
         }
         public void ClickDown()
         {
@@ -49,6 +57,7 @@ namespace Labirinth
             {
                 cyclebasic += "        y++; //шаг вверх \n";
                 CycleStr.text = cyclebefore + cyclebasic + "    }";
+                cycle.Add(Command.down);
                 return;
             }
             if (countstr >= maxstr)
@@ -56,7 +65,7 @@ namespace Labirinth
             countstr++;
             basic += "    y--; //шаг вниз " + countstr.ToString() + "\n";
             str.text = basic;
-            Debug.Log("y--; //шаг вниз");
+            commands.Add(Command.down);
         }
         public void ClickLeft()
         {
@@ -64,6 +73,7 @@ namespace Labirinth
             {
                 cyclebasic += "        y++; //шаг вверх \n";
                 CycleStr.text = cyclebefore + cyclebasic + "    }";
+                cycle.Add(Command.left);
                 return;
             }
             if (countstr >= maxstr)
@@ -73,7 +83,7 @@ namespace Labirinth
             countstr++;
             basic += "    x--; //шаг влево \n";
             str.text = basic;
-            Debug.Log("x--; //шаг влево");
+            commands.Add(Command.left);
         }
         public void ClickRight()
         {
@@ -81,6 +91,7 @@ namespace Labirinth
             {
                 cyclebasic += "        y++; //шаг вверх \n";
                 CycleStr.text = cyclebefore + cyclebasic + "    }";
+                cycle.Add(Command.right);
                 return;
             }
             if (countstr >= maxstr)
@@ -90,7 +101,7 @@ namespace Labirinth
             countstr++;
             basic += "    x++; //шаг вправо \n";
             str.text = basic;
-            Debug.Log("x++; //шаг вправо");
+            commands.Add(Command.right);
         }
         public void ClickReset()
         {
@@ -99,10 +110,11 @@ namespace Labirinth
             basic = string.Empty;
             str.text = basic;
             Debug.Log("заново");
+            commands.Clear();
         }
         public void ClickStart()
         {
-
+            human.SetCommands(commands);
         }
         public void ChangeScrollCycle()
         {
@@ -113,14 +125,11 @@ namespace Labirinth
         public void ChangeScrollFunc1()
         {
             func1 = funcarg1.value;
-            Debug.Log("func1=" + func1.ToString());
         }
         public void ChangeScrollFunc2()
         {
             func2 = funcarg2.value;
-            Debug.Log("func2=" + func2.ToString());
         }
-        //надо пофиксить буквы "ф" и "ц" в выводимом слове "функция"
         public void ClickFunc()
         {
             if (func1 < 1 || func2 < 1) { Debug.Log("fffffffff"); return; }
@@ -133,9 +142,25 @@ namespace Labirinth
                 case 4: a = "влево"; break;
                 default: a = "ошибка"; break;
             }
-            basic += "    jump (" + a + ',' + func2.ToString() + ") //функция прыжка";
-            Debug.Log("функция прыжка");
+            basic += "    jump (" + a + ',' + func2.ToString() + "); //прыжок";
+            int b=4+(func2-1)*4+func1;
+            commands.Add(ToCommand(b)); 
             str.text = basic;
+        }
+        Command ToCommand (int a)
+        {
+            switch (a)
+            {
+                case 5: return Command.jump_1_up;
+                case 6: return Command.jump_1_down;
+                case 7: return Command.jump_1_right;
+                case 8: return Command.jump_1_left;
+                case 9: return Command.jump_2_up;
+                case 10: return Command.jump_2_down;
+                case 11: return Command.jump_2_right;
+                case 12: return Command.jump_2_left;
+                default: return Command.brace;
+            }
         }
         //выскакивающие окошки
         public GameObject Maxstrok, Cycle;
@@ -153,11 +178,16 @@ namespace Labirinth
         public void AddCycle()
         {
             if (countc <= 1) return;
-            basic += "    " + cyclebefore + cyclebasic + "    }";
+            basic += "    " + cyclebefore + cyclebasic + "    }\n";
             str.text = basic;
             cyclebasic = string.Empty;
             incycle = false;
             Cycle.SetActive(false);
+            for(int i = 0; i < countc; i++)
+            {
+                commands.AddRange(cycle);
+            }
+            cycle.Clear();
         }
         public void Ok(GameObject x)
         {
