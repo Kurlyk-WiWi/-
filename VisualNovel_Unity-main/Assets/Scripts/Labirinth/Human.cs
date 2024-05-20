@@ -19,8 +19,8 @@ namespace Labirinth
     {
         [SerializeField] private float s;
         //для прыжка
-        public float acceleration = 9.81f;
-        private float jumptspeed = 0;
+        public float acceleration = 8f;
+        public float jumptspeed = 0;
         private bool lift = true;
         public List<Command> commands;
         public List<Command> code;
@@ -46,6 +46,7 @@ namespace Labirinth
         {
             rb=GetComponent<Rigidbody2D>();
             now = rb.position;
+            jumptspeed = 2 * s;
         }
 
         // Update is called once per frame
@@ -90,7 +91,7 @@ namespace Labirinth
                                 transform.Translate(Vector2.left * s * Time.deltaTime);
                                 if (lift)
                                 {
-                                    jumptspeed += acceleration;
+                                    jumptspeed -= acceleration;
                                     transform.Translate(Vector2.up * jumptspeed * Time.deltaTime);
                                     if (rb.position.y >= now.y + (field_scale / 2))
                                     { lift = false; jumptspeed = 0; }
@@ -105,8 +106,8 @@ namespace Labirinth
                                 }
                             }
                     else
-                            { now = rb.position; current++; lift = true; jumptspeed = 0;
-                            transform.Translate(Vector2.down * 25);
+                            { now = rb.position; current++; lift = true; jumptspeed = 2*s;
+                            //transform.Translate(Vector2.down * 25);
                             }
                     break;
                 case Command.jump_1_right:
@@ -115,7 +116,7 @@ namespace Labirinth
                         transform.Translate(Vector2.right * s * Time.deltaTime);
                         if (lift)
                         {
-                            jumptspeed += acceleration;
+                            jumptspeed -= acceleration;
                             transform.Translate(Vector2.up * jumptspeed * Time.deltaTime);
                             if (rb.position.y >= now.y + (field_scale / 2))
                             { lift = false; jumptspeed = 0; }
@@ -131,8 +132,8 @@ namespace Labirinth
                     }
                     else
                     {
-                        now = rb.position; current++; lift = true; jumptspeed = 0;
-                        transform.Translate(Vector2.down * 25);
+                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
+                        //transform.Translate(Vector2.down * 25);
                     }
                     break;
                 case Command.jump_1_up:
@@ -141,7 +142,7 @@ namespace Labirinth
                         transform.Translate(Vector2.up * s * Time.deltaTime);
                         if (lift)
                         {
-                            jumptspeed += acceleration;
+                            jumptspeed -= acceleration;
                             transform.Translate(Vector2.right * jumptspeed * Time.deltaTime);
                             if (rb.position.x >= now.x + (field_scale / 2))
                             { lift = false; jumptspeed = 0; }
@@ -157,8 +158,8 @@ namespace Labirinth
                     }
                     else
                     {
-                        now = rb.position; current++; lift = true; jumptspeed = 0;
-                        transform.Translate(Vector2.left * 25);
+                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
+                        //transform.Translate(Vector2.left * 25);
                     }
                     break;
                 case Command.jump_1_down:
@@ -167,7 +168,7 @@ namespace Labirinth
                         transform.Translate(Vector2.down * s * Time.deltaTime);
                         if (lift)
                         {
-                            jumptspeed += acceleration;
+                            jumptspeed -= acceleration;
                             transform.Translate(Vector2.left * jumptspeed * Time.deltaTime);
                             if (rb.position.x <= now.x - (field_scale / 2))
                             { lift = false; jumptspeed = 0; }
@@ -183,8 +184,112 @@ namespace Labirinth
                     }
                     else
                     {
-                        now = rb.position; current++; lift = true; jumptspeed = 0;
+                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
                         transform.Translate(Vector2.right * 25);
+                    }
+                    break;
+                case Command.jump_2_left: // хуита
+                    if (rb.position.x >= now.x - field_scale*1.5)
+                    {
+                        transform.Translate(Vector2.left * s * Time.deltaTime);
+                        if (lift)
+                        {
+                            jumptspeed -= acceleration;
+                            transform.Translate(Vector2.up * jumptspeed * Time.deltaTime);
+                            if (rb.position.y >= now.y + field_scale*0.7 )
+                            { lift = false; jumptspeed = 0; }
+                        }
+                        else
+                        {
+                            if (rb.position.y >= now.y)
+                            {
+                                jumptspeed += acceleration;
+                                transform.Translate(Vector2.down * jumptspeed * Time.deltaTime);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
+                        transform.Translate(Vector2.down * 49f);
+                    }
+                    break;
+                case Command.jump_2_right:
+                    if (rb.position.x <= now.x + field_scale*1.5)
+                    {
+                        transform.Translate(Vector2.right * s * Time.deltaTime);
+                        if (lift)
+                        {
+                            jumptspeed -= acceleration;
+                            transform.Translate(Vector2.up * jumptspeed * Time.deltaTime);
+                            if (rb.position.y >= now.y + (field_scale / 2)*0.7)
+                            { lift = false; jumptspeed = 0; }
+                        }
+                        else
+                        {
+                            if (rb.position.y >= now.y)
+                            {
+                                jumptspeed += acceleration;
+                                transform.Translate(Vector2.down * jumptspeed * Time.deltaTime);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
+                        transform.Translate(Vector2.down * 49f);
+                    }
+                    break;
+                case Command.jump_2_up:
+                    if (rb.position.y <= now.y + field_scale * 1.5)
+                    {
+                        transform.Translate(Vector2.up * s * Time.deltaTime);
+                        if (lift)
+                        {
+                            jumptspeed -= acceleration;
+                            transform.Translate(Vector2.right * jumptspeed * Time.deltaTime);
+                            if (rb.position.x >= now.x + (field_scale / 2)*0.7)
+                            { lift = false; jumptspeed = 0; }
+                        }
+                        else
+                        {
+                            if (rb.position.x >= now.x)
+                            {
+                                jumptspeed += acceleration;
+                                transform.Translate(Vector2.left * jumptspeed * Time.deltaTime);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
+                        transform.Translate(Vector2.left * 49f);
+                    }
+                    break;
+                case Command.jump_2_down:
+                    if (rb.position.y >= now.y - field_scale * 1.5)
+                    {
+                        transform.Translate(Vector2.down * s * Time.deltaTime);
+                        if (lift)
+                        {
+                            jumptspeed -= acceleration;
+                            transform.Translate(Vector2.left * jumptspeed * Time.deltaTime);
+                            if (rb.position.x <= now.x - (field_scale / 2)*0.7)
+                            { lift = false; jumptspeed = 0; }
+                        }
+                        else
+                        {
+                            if (rb.position.x <= now.x)
+                            {
+                                jumptspeed += acceleration;
+                                transform.Translate(Vector2.left * jumptspeed * Time.deltaTime);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        now = rb.position; current++; lift = true; jumptspeed = 2 * s;
+                        transform.Translate(Vector2.right * 49f);
                     }
                     break;
             }
