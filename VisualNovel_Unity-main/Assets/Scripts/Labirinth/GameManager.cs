@@ -21,7 +21,8 @@ namespace Labirinth
         public int func1, func2;
         public List <Command> commands;
         public List<Command> cycle;
-
+        public Level level;
+        public GameObject bag;
         // Start is called before the first frame update
         void Start()
         {
@@ -30,10 +31,11 @@ namespace Labirinth
             func1 = 0; func2 = 0;
             commands = new List <Command>();
             cycle = new List <Command>();
+            //level.Arrangement(human.rb, 0);
         }
         void Update()
         {
-
+            //level.Arrangement(human.rb, 0);
         }
         public void ClickUp()
         {

@@ -25,7 +25,6 @@ namespace Labirinth
         public List<Command> commands;
         public List<Command> code;
         public Rigidbody2D rb;
-        private Vector2 moveVelocity;
         public  Rigidbody2D field;
         public int door, massiv; // клеточка двери и двоичное кодировка наличия багов на поле
         public float field_scale; //размер поля

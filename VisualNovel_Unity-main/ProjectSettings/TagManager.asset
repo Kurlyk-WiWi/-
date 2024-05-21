@@ -50,6 +50,9 @@ TagManager:
   - name: Cycle
     uniqueID: 1259502221
     locked: 0
+  - name: Bags
+    uniqueID: 2658444519
+    locked: 0
   - name: UI
     uniqueID: 3360256599
     locked: 0
