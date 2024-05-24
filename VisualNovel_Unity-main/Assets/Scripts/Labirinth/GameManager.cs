@@ -10,6 +10,7 @@ namespace Labirinth
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private Human human;
+        public Rigidbody2D player;
         public TMP_Text str;
         public TMP_Dropdown countcycle;
         public TMP_Dropdown funcarg1, funcarg2;
@@ -21,8 +22,8 @@ namespace Labirinth
         public int func1, func2;
         public List <Command> commands;
         public List<Command> cycle;
-        public Level level;
-        public GameObject bag;
+        public GameObject door;
+        public Level leveldisiner;
         // Start is called before the first frame update
         void Start()
         {
@@ -31,12 +32,13 @@ namespace Labirinth
             func1 = 0; func2 = 0;
             commands = new List <Command>();
             cycle = new List <Command>();
-            //level.Arrangement(human.rb, 0);
         }
-        void Update()
+        /*
+        public void NextLevel(GameObject x)
         {
-            //level.Arrangement(human.rb, 0);
-        }
+            x.SetActive(false);
+            leveldisiner.Arrangement(human.rb, ++level_numder);
+        }*/
         public void ClickUp()
         {
             if (incycle)
@@ -117,6 +119,7 @@ namespace Labirinth
         public void ClickStart()
         {
             human.SetCommands(commands);
+            commands.Clear();
         }
         public void ChangeScrollCycle()
         {
@@ -195,5 +198,12 @@ namespace Labirinth
         {
             if (x != null) x.SetActive(false);
         }
+        /*public void Win(GameObject x)
+        {
+            if (human.rb.transform.position != door.transform.position)
+            {
+                x.SetActive(true);
+            }
+        }*/
     }
 }

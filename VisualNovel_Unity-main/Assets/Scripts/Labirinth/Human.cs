@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UIElements;
+using static System.Math;
 
 namespace Labirinth
 {
@@ -18,43 +19,40 @@ namespace Labirinth
     public class Human : MonoBehaviour
     {
         [SerializeField] private float s;
+        private float compare=20;
         //для прыжка
-        public float acceleration = 8f;
-        public float jumptspeed = 0;
         private bool lift = true;
         public List<Command> commands;
-        public List<Command> code;
         public Rigidbody2D rb;
-        public  Rigidbody2D field;
-        public int door, massiv; // клеточка двери и двоичное кодировка наличия багов на поле
+        public  BoxCollider2D field;
         public float field_scale; //размер поля
         public int current=0;
         public Vector2 now;
+        public GameObject door;
         public Human()
         {
             commands = new List<Command>();
-            code = new List<Command>();
+            
+        }
+        public void Start()
+        {
+            field_scale = field.transform.localScale.x*1.305f;
         }
         public void SetCommands(List <Command> commands)
         {
             this.commands = commands.ToList();
-            Debug.Log(this.code.Count);
-        }
-        // Start is called before the first frame update
-        void Start()
-        {
-            rb=GetComponent<Rigidbody2D>();
+            rb = GetComponent<Rigidbody2D>();
+            current = 0;
+            Debug.Log(this.commands.Count);
+            lift = true; //jumptspeed = multipler * s;
             now = rb.position;
-            jumptspeed = 2 * s;
         }
-
-        // Update is called once per frame
-        void Update()
-        {}
         private void FixedUpdate()
         {
-            //if (commands.Count == 0) return;
-            if (commands.Count == current) return;
+            if (commands.Count == current)
+            {
+                Win();
+                return; }
             switch (commands[current])
             {
                 case 0:
@@ -90,24 +88,20 @@ namespace Labirinth
                                 transform.Translate(Vector2.left * s * Time.deltaTime);
                                 if (lift)
                                 {
-                                    jumptspeed -= acceleration;
-                                    transform.Translate(Vector2.up * jumptspeed * Time.deltaTime);
+                                    transform.Translate(Vector2.up * s * Time.deltaTime);
                                     if (rb.position.y >= now.y + (field_scale / 2))
-                                    { lift = false; jumptspeed = 0; }
+                                    { lift = false; }
                                 }
                                 else
                                 {
                                     if (rb.position.y >= now.y)
                                     {
-                                        jumptspeed += acceleration;
-                                        transform.Translate(Vector2.down * jumptspeed * Time.deltaTime);
+                                        transform.Translate(Vector2.down * s * Time.deltaTime);
                                     }
                                 }
                             }
                     else
-                            { now = rb.position; current++; lift = true; jumptspeed = 2*s;
-                            //transform.Translate(Vector2.down * 25);
-                            }
+                            { now = rb.position; current++; lift = true;}
                     break;
                 case Command.jump_1_right:
                     if (rb.position.x <= now.x + field_scale)
@@ -115,23 +109,21 @@ namespace Labirinth
                         transform.Translate(Vector2.right * s * Time.deltaTime);
                         if (lift)
                         {
-                            jumptspeed -= acceleration;
-                            transform.Translate(Vector2.up * jumptspeed * Time.deltaTime);
+                            transform.Translate(Vector2.up * s * Time.deltaTime);
                             if (rb.position.y >= now.y + (field_scale / 2))
-                            { lift = false; jumptspeed = 0; }
+                            { lift = false; }
                         }
                         else
                         {
                             if (rb.position.y >= now.y)
                             {
-                                jumptspeed += acceleration;
-                                transform.Translate(Vector2.down * jumptspeed * Time.deltaTime);
+                                transform.Translate(Vector2.down * s * Time.deltaTime);
                             }
                         }
                     }
                     else
                     {
-                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
+                        now = rb.position; current++; lift = true;
                         //transform.Translate(Vector2.down * 25);
                     }
                     break;
@@ -141,23 +133,21 @@ namespace Labirinth
                         transform.Translate(Vector2.up * s * Time.deltaTime);
                         if (lift)
                         {
-                            jumptspeed -= acceleration;
-                            transform.Translate(Vector2.right * jumptspeed * Time.deltaTime);
+                            transform.Translate(Vector2.right * s * Time.deltaTime);
                             if (rb.position.x >= now.x + (field_scale / 2))
-                            { lift = false; jumptspeed = 0; }
+                            { lift = false; }
                         }
                         else
                         {
                             if (rb.position.x >= now.x)
                             {
-                                jumptspeed += acceleration;
-                                transform.Translate(Vector2.left * jumptspeed * Time.deltaTime);
+                                transform.Translate(Vector2.left * s * Time.deltaTime);
                             }
                         }
                     }
                     else
                     {
-                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
+                        now = rb.position; current++; lift = true;
                         //transform.Translate(Vector2.left * 25);
                     }
                     break;
@@ -167,23 +157,21 @@ namespace Labirinth
                         transform.Translate(Vector2.down * s * Time.deltaTime);
                         if (lift)
                         {
-                            jumptspeed -= acceleration;
-                            transform.Translate(Vector2.left * jumptspeed * Time.deltaTime);
+                            transform.Translate(Vector2.left * s * Time.deltaTime);
                             if (rb.position.x <= now.x - (field_scale / 2))
-                            { lift = false; jumptspeed = 0; }
+                            { lift = false; }
                         }
                         else
                         {
                             if (rb.position.x <= now.x)
                             {
-                                jumptspeed += acceleration;
-                                transform.Translate(Vector2.left * jumptspeed * Time.deltaTime);
+                                transform.Translate(Vector2.left * s * Time.deltaTime);
                             }
                         }
                     }
                     else
                     {
-                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
+                        now = rb.position; current++; lift = true;
                         transform.Translate(Vector2.right * 25);
                     }
                     break;
@@ -193,24 +181,25 @@ namespace Labirinth
                         transform.Translate(Vector2.left * s * Time.deltaTime);
                         if (lift)
                         {
-                            jumptspeed -= acceleration;
-                            transform.Translate(Vector2.up * jumptspeed * Time.deltaTime);
+                            transform.Translate(Vector2.up * s * Time.deltaTime);
                             if (rb.position.y >= now.y + field_scale*0.7 )
-                            { lift = false; jumptspeed = 0; }
+                            { lift = false; }
+                            Debug.Log("вверх");
                         }
                         else
                         {
                             if (rb.position.y >= now.y)
                             {
-                                jumptspeed += acceleration;
-                                transform.Translate(Vector2.down * jumptspeed * Time.deltaTime);
+                                transform.Translate(Vector2.down * s * Time.deltaTime);
+                                Debug.Log("вниз");
+
                             }
                         }
                     }
                     else
                     {
-                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
-                        transform.Translate(Vector2.down * 49f);
+                        now = rb.position; current++; lift = true;
+                        //transform.Translate(Vector2.down * 49f);
                     }
                     break;
                 case Command.jump_2_right:
@@ -219,24 +208,21 @@ namespace Labirinth
                         transform.Translate(Vector2.right * s * Time.deltaTime);
                         if (lift)
                         {
-                            jumptspeed -= acceleration;
-                            transform.Translate(Vector2.up * jumptspeed * Time.deltaTime);
-                            if (rb.position.y >= now.y + (field_scale / 2)*0.7)
-                            { lift = false; jumptspeed = 0; }
+                            transform.Translate(Vector2.up * s * Time.deltaTime);
+                            if (rb.position.y >= now.y + field_scale *0.7)
+                            { lift = false;}
                         }
                         else
                         {
                             if (rb.position.y >= now.y)
                             {
-                                jumptspeed += acceleration;
-                                transform.Translate(Vector2.down * jumptspeed * Time.deltaTime);
+                                transform.Translate(Vector2.down * s * Time.deltaTime);
                             }
                         }
                     }
                     else
                     {
-                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
-                        transform.Translate(Vector2.down * 49f);
+                        now = rb.position; current++; lift = true; 
                     }
                     break;
                 case Command.jump_2_up:
@@ -245,24 +231,21 @@ namespace Labirinth
                         transform.Translate(Vector2.up * s * Time.deltaTime);
                         if (lift)
                         {
-                            jumptspeed -= acceleration;
-                            transform.Translate(Vector2.right * jumptspeed * Time.deltaTime);
-                            if (rb.position.x >= now.x + (field_scale / 2)*0.7)
-                            { lift = false; jumptspeed = 0; }
+                            transform.Translate(Vector2.right * s * Time.deltaTime);
+                            if (rb.position.x >= now.x + field_scale*0.7)
+                            { lift = false; }
                         }
                         else
                         {
                             if (rb.position.x >= now.x)
                             {
-                                jumptspeed += acceleration;
-                                transform.Translate(Vector2.left * jumptspeed * Time.deltaTime);
+                                transform.Translate(Vector2.left * s * Time.deltaTime);
                             }
                         }
                     }
                     else
                     {
-                        now = rb.position; current++; lift = true; jumptspeed = 2*s;
-                        transform.Translate(Vector2.left * 49f);
+                        now = rb.position; current++; lift = true;
                     }
                     break;
                 case Command.jump_2_down:
@@ -271,28 +254,34 @@ namespace Labirinth
                         transform.Translate(Vector2.down * s * Time.deltaTime);
                         if (lift)
                         {
-                            jumptspeed -= acceleration;
-                            transform.Translate(Vector2.left * jumptspeed * Time.deltaTime);
-                            if (rb.position.x <= now.x - (field_scale / 2)*0.7)
-                            { lift = false; jumptspeed = 0; }
+                            transform.Translate(Vector2.left * s * Time.deltaTime);
+                            if (rb.position.x <= now.x - field_scale *0.7)
+                            { lift = false; }
                         }
                         else
                         {
                             if (rb.position.x <= now.x)
                             {
-                                jumptspeed += acceleration;
-                                transform.Translate(Vector2.left * jumptspeed * Time.deltaTime);
+                                transform.Translate(Vector2.right * s * Time.deltaTime);
                             }
                         }
                     }
                     else
                     {
-                        now = rb.position; current++; lift = true; jumptspeed = 2 * s;
-                        transform.Translate(Vector2.right * 49f);
+                        now = rb.position; current++; lift = true;
                     }
                     break;
             }
-            Debug.Log(rb.position.y.ToString()+"  " +rb.position.x.ToString());
+        }
+        public GameObject win;
+        public void Win()
+        {
+            if (win.activeSelf) return;
+            if (Abs(rb.transform.position.x- door.transform.position.x) < compare &&
+                Abs(rb.transform.position.y - door.transform.position.y) < compare)
+            { 
+                win.SetActive(true);
+            }
         }
     }
 }
