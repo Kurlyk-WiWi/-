@@ -41,6 +41,7 @@ namespace Labirinth
         private float const_z = 3.7f;
         public Rigidbody2D human;
         public int level_numder = 0;
+        public bool erasetext=false;
         public void Start()
         {
             field_place_x = field.transform.position.x;
@@ -79,17 +80,17 @@ namespace Labirinth
             }
         }
         public GameObject win;
-        /*public void Win()
-        {
-            if (human.transform.position != sprites[door_number].transform.position)
-            {
-                win.SetActive(true);
-            }
-        }*/
         public void NextLevel(GameObject x)
         {
             x.SetActive(false);
             Arrangement(human, ++level_numder);
+            erasetext = true;
+        }
+        public void Restart (GameObject x)
+        {
+            x.SetActive(false);
+            Arrangement(human, level_numder);
+            erasetext = true;
         }
     }
 }

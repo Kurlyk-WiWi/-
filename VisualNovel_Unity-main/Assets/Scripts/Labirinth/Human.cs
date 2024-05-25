@@ -29,9 +29,11 @@ namespace Labirinth
         public int current=0;
         public Vector2 now;
         public GameObject door;
+        public List<GameObject> bags;
         public Human()
         {
             commands = new List<Command>();
+            bags = new List<GameObject>();
             
         }
         public void Start()
@@ -59,30 +61,40 @@ namespace Labirinth
                     current++;
                     break;
                 case Command.up:
+                    if (now.y >= field.transform.position.y + (field_scale * 3 / 4))
+                        Lose();
                     if (rb.position.y <= now.y + (field_scale / 2))
                         rb.transform.Translate(Vector2.up * s * Time.deltaTime);
                     if (rb.position.y >= now.y + (field_scale / 2))
                     { now = rb.position; current++;}
                     break;
                 case Command.down:
+                    if (now.y < field.transform.position.y - (field_scale*3/4))
+                    { Lose(); } 
                     if (rb.position.y >= now.y - (field_scale / 2))
                         transform.Translate(Vector2.down * s * Time.deltaTime);
                     if (rb.position.y <= now.y - (field_scale / 2))
                     { now = rb.position; current++; }
                     break;
                 case Command.right:
+                    if (now.x > field.transform.position.x + (field_scale  / 2))
+                    { Lose(); }
                     if (rb.position.x <= now.x + (field_scale / 2))
                         transform.Translate(Vector2.right * s * Time.deltaTime);
                     if (rb.position.x >= now.x + (field_scale / 2))
                     { now = rb.position; current++; }
                     break;
                 case Command.left:
+                    if (now.x < field.transform.position.x - (field_scale / 2))
+                    { Lose(); }
                     if (rb.position.x >= now.x - (field_scale / 2))
                         transform.Translate(Vector2.left * s * Time.deltaTime);
                     if (rb.position.x <= now.x - (field_scale / 2))
                     { now = rb.position; current++; }
                     break;
                 case Command.jump_1_left:
+                    if (now.x <= field.transform.position.x )
+                        Lose();
                     if (rb.position.x >= now.x - field_scale)
                             {
                                 transform.Translate(Vector2.left * s * Time.deltaTime);
@@ -104,6 +116,8 @@ namespace Labirinth
                             { now = rb.position; current++; lift = true;}
                     break;
                 case Command.jump_1_right:
+                    if (now.x >= field.transform.position.x)
+                        Lose();
                     if (rb.position.x <= now.x + field_scale)
                     {
                         transform.Translate(Vector2.right * s * Time.deltaTime);
@@ -128,6 +142,8 @@ namespace Labirinth
                     }
                     break;
                 case Command.jump_1_up:
+                    if (now.y >= field.transform.position.y)
+                        Lose();
                     if (rb.position.y <= now.y + field_scale)
                     {
                         transform.Translate(Vector2.up * s * Time.deltaTime);
@@ -152,6 +168,8 @@ namespace Labirinth
                     }
                     break;
                 case Command.jump_1_down:
+                    if (now.y <= field.transform.position.y)
+                        Lose();
                     if (rb.position.y >= now.y - field_scale)
                     {
                         transform.Translate(Vector2.down * s * Time.deltaTime);
@@ -175,7 +193,9 @@ namespace Labirinth
                         transform.Translate(Vector2.right * 25);
                     }
                     break;
-                case Command.jump_2_left: // хуита
+                case Command.jump_2_left:
+                    if (now.x < field.transform.position.x+field_scale/2)
+                        Lose();
                     if (rb.position.x >= now.x - field_scale*1.5)
                     {
                         transform.Translate(Vector2.left * s * Time.deltaTime);
@@ -203,6 +223,8 @@ namespace Labirinth
                     }
                     break;
                 case Command.jump_2_right:
+                    if (now.x >= field.transform.position.x - field_scale / 2)
+                        Lose();
                     if (rb.position.x <= now.x + field_scale*1.5)
                     {
                         transform.Translate(Vector2.right * s * Time.deltaTime);
@@ -226,6 +248,8 @@ namespace Labirinth
                     }
                     break;
                 case Command.jump_2_up:
+                    if (now.y >= field.transform.position.y - field_scale / 2)
+                        Lose();
                     if (rb.position.y <= now.y + field_scale * 1.5)
                     {
                         transform.Translate(Vector2.up * s * Time.deltaTime);
@@ -249,6 +273,8 @@ namespace Labirinth
                     }
                     break;
                 case Command.jump_2_down:
+                    if (now.y <= field.transform.position.y + field_scale / 2)
+                        Lose();
                     if (rb.position.y >= now.y - field_scale * 1.5)
                     {
                         transform.Translate(Vector2.down * s * Time.deltaTime);
@@ -277,11 +303,20 @@ namespace Labirinth
         public void Win()
         {
             if (win.activeSelf) return;
-            if (Abs(rb.transform.position.x- door.transform.position.x) < compare &&
+            if (Abs(rb.transform.position.x - door.transform.position.x) < compare &&
                 Abs(rb.transform.position.y - door.transform.position.y) < compare)
-            { 
+            {
                 win.SetActive(true);
             }
+        }
+        public GameObject lose;
+        public void Lose()
+        {
+            if(lose.activeSelf) return;
+            if (win.activeSelf) return;
+            lose.SetActive(true);
+            current=commands.Count;
+            
         }
     }
 }

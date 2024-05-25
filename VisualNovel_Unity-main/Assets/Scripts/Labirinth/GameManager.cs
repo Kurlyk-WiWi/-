@@ -33,12 +33,6 @@ namespace Labirinth
             commands = new List <Command>();
             cycle = new List <Command>();
         }
-        /*
-        public void NextLevel(GameObject x)
-        {
-            x.SetActive(false);
-            leveldisiner.Arrangement(human.rb, ++level_numder);
-        }*/
         public void ClickUp()
         {
             if (incycle)
@@ -172,7 +166,6 @@ namespace Labirinth
         public TMP_Text CycleStr;
         public string cyclebefore, cyclebasic;
         public bool incycle = false;
-        //доработай эту фигню
         public void ClickCycle()
         {
             Cycle.SetActive(true);

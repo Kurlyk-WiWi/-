@@ -15,6 +15,7 @@ public class Jumping : MonoBehaviour
     {
         
     }
+    /*
     void FixedUpdate()
     {
         case Command.jump_1_left:
@@ -229,4 +230,5 @@ public class Jumping : MonoBehaviour
             }
             break;
         }
+    */
 }
