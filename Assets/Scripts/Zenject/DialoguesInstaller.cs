@@ -13,5 +13,4 @@ public class DialoguesInstaller : MonoBehaviour
 
     public GameObject choiceButtonsPanel;
     public GameObject choiceButton;
-    public GameObject choiceButtons;
 }
