@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 209159941}
   - component: {fileID: 209159940}
   - component: {fileID: 209159939}
-  - component: {fileID: 209159942}
   m_Layer: 5
   m_Name: Character4
   m_TagString: Untagged
@@ -175,10 +174,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emotions:
-  - {fileID: 21300000, guid: dd607ec421805974384a3d53b6fd50c8, type: 3}
+  - {fileID: 21300000, guid: 830aa8c79bcdd614a81d4bd5d72d5a6c, type: 3}
   - {fileID: 21300000, guid: 2e49df197d4c47345ba7a04ed40dbfe4, type: 3}
   - {fileID: 21300000, guid: 8a1845f3708101d43927c65d0d5b07ca, type: 3}
-  - {fileID: 21300000, guid: 830aa8c79bcdd614a81d4bd5d72d5a6c, type: 3}
+  - {fileID: 21300000, guid: dd607ec421805974384a3d53b6fd50c8, type: 3}
   characterName: "\u041C\u0438\u0440\u0430"
 --- !u!114 &209159940
 MonoBehaviour:
@@ -218,18 +217,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209159937}
   m_CullTransparentMesh: 1
---- !u!225 &209159942
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209159937}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &282841546
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,7 +465,6 @@ GameObject:
   - component: {fileID: 450822276}
   - component: {fileID: 450822275}
   - component: {fileID: 450822274}
-  - component: {fileID: 450822277}
   m_Layer: 5
   m_Name: Character5
   m_TagString: Untagged
@@ -558,18 +544,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 450822272}
   m_CullTransparentMesh: 1
---- !u!225 &450822277
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 450822272}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,7 +654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &641858202
 RectTransform:
   m_ObjectHideFlags: 0
@@ -688,18 +662,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 641858201}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 282841547}
-  m_Father: {fileID: 1245399077}
+  m_Father: {fileID: 1337502323}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.000092, y: -485.7732}
-  m_SizeDelta: {x: 222.812, y: 50.379}
+  m_AnchoredPosition: {x: -26, y: -118.59}
+  m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &641858203
 MonoBehaviour:
@@ -770,7 +744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7176471}
+  m_Color: {r: 0.03529412, g: 0.87058824, b: 0.22352941, a: 0.7176471}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -807,7 +781,6 @@ GameObject:
   - component: {fileID: 717427343}
   - component: {fileID: 717427342}
   - component: {fileID: 717427341}
-  - component: {fileID: 717427344}
   m_Layer: 5
   m_Name: Character6
   m_TagString: Untagged
@@ -887,18 +860,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 717427339}
   m_CullTransparentMesh: 1
---- !u!225 &717427344
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 717427339}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &1245399073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,7 +961,6 @@ RectTransform:
   - {fileID: 209159938}
   - {fileID: 450822273}
   - {fileID: 717427340}
-  - {fileID: 641858202}
   - {fileID: 1337502323}
   - {fileID: 404734230}
   m_Father: {fileID: 0}
@@ -1021,7 +981,6 @@ GameObject:
   - component: {fileID: 1293407073}
   - component: {fileID: 1293407075}
   - component: {fileID: 1293407074}
-  - component: {fileID: 1293407076}
   m_Layer: 5
   m_Name: DIalogue
   m_TagString: Untagged
@@ -1145,18 +1104,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293407072}
   m_CullTransparentMesh: 1
---- !u!225 &1293407076
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293407072}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &1337502322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,7 +1115,6 @@ GameObject:
   - component: {fileID: 1337502323}
   - component: {fileID: 1337502325}
   - component: {fileID: 1337502324}
-  - component: {fileID: 1337502326}
   m_Layer: 5
   m_Name: DIaloguePanel
   m_TagString: Untagged
@@ -1190,12 +1136,13 @@ RectTransform:
   m_Children:
   - {fileID: 1293407073}
   - {fileID: 1699276663}
+  - {fileID: 641858202}
   m_Father: {fileID: 1245399077}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -37.254}
-  m_SizeDelta: {x: 1920, y: 304.422}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 267.17}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1337502324
 MonoBehaviour:
@@ -1210,7 +1157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6627451}
+  m_Color: {r: 0.04045032, g: 0.9528302, b: 0.15202124, a: 0.6627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1235,18 +1182,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1337502322}
   m_CullTransparentMesh: 1
---- !u!225 &1337502326
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1337502322}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &1381918840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,7 +1272,6 @@ GameObject:
   - component: {fileID: 1512176234}
   - component: {fileID: 1512176233}
   - component: {fileID: 1512176235}
-  - component: {fileID: 1512176236}
   m_Layer: 5
   m_Name: Character1
   m_TagString: Untagged
@@ -1415,27 +1349,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emotions:
-  - {fileID: 21300000, guid: dd607ec421805974384a3d53b6fd50c8, type: 3}
+  - {fileID: 21300000, guid: 1a707d04962dfd3428ff866332542822, type: 3}
   - {fileID: 21300000, guid: 3fc38088e06df4840bd4d51fbaa03851, type: 3}
   - {fileID: 21300000, guid: f7274f6b466f4d74292fcbdd0c644fb0, type: 3}
   - {fileID: 21300000, guid: c0e7ab1ecd056424fbeae3e00dadd2ee, type: 3}
   - {fileID: 21300000, guid: c0bf35cf7009b4d4a963f5bd08114aec, type: 3}
   - {fileID: 21300000, guid: 8c5abbfd40af2be4db673485444328db, type: 3}
   - {fileID: 21300000, guid: 65a83a6d1a9a6534fab8786c39895d1c, type: 3}
-  - {fileID: 21300000, guid: 1a707d04962dfd3428ff866332542822, type: 3}
+  - {fileID: 21300000, guid: dd607ec421805974384a3d53b6fd50c8, type: 3}
   characterName: "\u042E\u0440\u0438\u0439"
---- !u!225 &1512176236
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1512176231}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &1518340929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,7 +1424,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _choiceButtonsPanel: {fileID: 0}
-  typingSpeed: 0.05
 --- !u!114 &1518340933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1596,7 +1517,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -497, y: 0}
+  m_AnchoredPosition: {x: -504, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1699276664
@@ -1708,7 +1629,6 @@ GameObject:
   - component: {fileID: 1738785114}
   - component: {fileID: 1738785113}
   - component: {fileID: 1738785112}
-  - component: {fileID: 1738785115}
   m_Layer: 5
   m_Name: Character3
   m_TagString: Untagged
@@ -1748,10 +1668,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   emotions:
-  - {fileID: 21300000, guid: dd607ec421805974384a3d53b6fd50c8, type: 3}
+  - {fileID: 21300000, guid: 5dd33fb8d458ec44c8bbeba370a02469, type: 3}
   - {fileID: 21300000, guid: 4e8dbe141c9b6ed4d818523f3f08974c, type: 3}
   - {fileID: 21300000, guid: 50092dcb46b44e34f86e8eec801c7a42, type: 3}
-  - {fileID: 21300000, guid: 5dd33fb8d458ec44c8bbeba370a02469, type: 3}
+  - {fileID: 21300000, guid: dd607ec421805974384a3d53b6fd50c8, type: 3}
   characterName: "\u0412\u0430\u0441\u0438\u043B\u0438\u0441\u0430 \u041F\u0440\u0435\u043A\u0440\u0430\u0441\u043D\u0430\u044F"
 --- !u!114 &1738785113
 MonoBehaviour:
@@ -1791,18 +1711,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1738785110}
   m_CullTransparentMesh: 1
---- !u!225 &1738785115
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1738785110}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &1886591237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,7 +1725,6 @@ GameObject:
   - component: {fileID: 1886591241}
   - component: {fileID: 1886591242}
   - component: {fileID: 1886591243}
-  - component: {fileID: 1886591244}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1841,8 +1748,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 14.509}
-  m_SizeDelta: {x: 1920, y: 1050.9}
+  m_AnchoredPosition: {x: 0, y: 20.178}
+  m_SizeDelta: {x: 1920, y: 1039.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1886591239
 MonoBehaviour:
@@ -1913,9 +1820,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.194
+  m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2010,21 +1917,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audies:
-  - {fileID: 8300000, guid: 0b6de53a68ac0cd4184c2765ec205754, type: 3}
+  - {fileID: 8300000, guid: 07de258bec4adee46bc2466225bcd29d, type: 3}
   - {fileID: 8300000, guid: c26141a9e2a4a0e4ea03d7500244b280, type: 3}
   - {fileID: 8300000, guid: 0e0ea6234df70314f960875875017ce1, type: 3}
---- !u!225 &1886591244
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886591237}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1 &2128185155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2037,7 +1932,6 @@ GameObject:
   - component: {fileID: 2128185158}
   - component: {fileID: 2128185157}
   - component: {fileID: 2128185159}
-  - component: {fileID: 2128185160}
   m_Layer: 5
   m_Name: Character2
   m_TagString: Untagged
@@ -2117,18 +2011,6 @@ MonoBehaviour:
   emotions:
   - {fileID: 21300000, guid: dd607ec421805974384a3d53b6fd50c8, type: 3}
   characterName: "\u0420\u0430\u0441\u0441\u043A\u0430\u0437\u0447\u0438\u043A"
---- !u!225 &2128185160
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2128185155}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

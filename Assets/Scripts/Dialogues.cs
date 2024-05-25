@@ -24,8 +24,7 @@ public class Dialogues : MonoBehaviour
     private Audies audies;
     private int currentMusicIndex = -1; // Текущий индекс воспроизводимой музыки
     private float multiplier = 1.1f;
-    private Stack<(int, string)> _dialogueHistory = new Stack<(int, string)>();
-    public float typingSpeed = 0.1f; // Скорость появления текста по буквам
+    private Stack<string> _dialogueHistory = new Stack<string>();
     public bool DialogPlay { get; private set; }
     [Inject]
     public void Construct(DialoguesInstaller dialoguesInstaller)
@@ -55,7 +54,7 @@ public class Dialogues : MonoBehaviour
         StartDialogue();
 
     }
-    public  void StartDialogue()
+    public void StartDialogue()
     {
         DialogPlay = true;
         _dialoguePanel.SetActive(true);
@@ -65,76 +64,44 @@ public class Dialogues : MonoBehaviour
     {
         if (_currentStory.canContinue)
         {
-            string currentDialogueState = _currentStory.state.ToJson();
-            if (!choiceBefore)
-            {
-                int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-                _dialogueHistory.Push((currentSceneIndex, currentDialogueState)); // Сохранять состояние истории с индексом сцены
-            }
             ShowDialogue();
             ShowChoiceButtons();
         }
-        else if (!choiceBefore)
+        else if(!choiceBefore)
         {
             ExitDialogue();
         }
     }
-
     public void GoBackDialogue()
     {
-        if (_dialogueHistory.Count > 1) // Должно быть хотя бы два состояния в истории, чтобы вернуться назад
+        if (_dialogueHistory.Count > 0)
         {
-            _dialogueHistory.Pop(); // Удалить текущее состояние
-            var (previousSceneIndex, previousDialogueState) = _dialogueHistory.Peek();
-            if (SceneManager.GetActiveScene().buildIndex != previousSceneIndex)
-            {
-                SceneManager.LoadScene(previousSceneIndex);
-                StartCoroutine(RestoreDialogueState(previousDialogueState));
-            }
-            else
-            {
-                _currentStory.state.LoadJson(previousDialogueState); // Загрузить предыдущее состояние
-                ShowDialogue();
-                ShowChoiceButtons();
-            }
+            _currentStory.state.LoadJson(_dialogueHistory.Pop());
+            ShowDialogue();
+            ShowChoiceButtons();
         }
         else
         {
             Debug.Log("Нельзя вернуться назад.");
         }
     }
-    private IEnumerator RestoreDialogueState(string state)
+    private void DisableAllCharactersExcept(int index)
     {
-        yield return null; // Подождать один кадр для завершения загрузки сцены
-        _currentStory.state.LoadJson(state); // Загрузить предыдущее состояние диалога
-        ShowDialogue();
-        ShowChoiceButtons();
-    }
-
-    
-    private IEnumerator TypeSentence(string sentence)
-    {
-        _dialogueText.text = "";
-        foreach (char letter in sentence.ToCharArray())
+        for (int i = 0; i < characters.Count; i++)
         {
-            _dialogueText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            if (i != index)
+            {
+                characters[i].SetExpressionState(0);
+            }
         }
     }
+
     private void ShowDialogue()
     {
-        string dialogueLine = _currentStory.Continue();
+        string currentDialogueState = _currentStory.state.ToJson();
+        _dialogueHistory.Push(currentDialogueState);
+        _dialogueText.text = _currentStory.Continue();
         _nameText.text = (string)_currentStory.variablesState["characterName"];
-
-        // Остановить текущую корутину печати текста, если она выполняется
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(dialogueLine));
-
-        // Установить characterExpression всех персонажей в 0 перед изменением выражения
-        foreach (var character in characters)
-        {
-            character.ChangeEmotion(0);
-        }
 
         var index = characters.FindIndex(character => character.characterName.Contains(_nameText.text));
         characters[index].ChangeEmotion((int)_currentStory.variablesState["characterExpression"]);
@@ -154,7 +121,6 @@ public class Dialogues : MonoBehaviour
 
             // Check for other tags if needed
         }
-
         // Получаем значение переменной "Music" из истории и воспроизводим соответствующий трек
         if (_currentStory.variablesState.Contains("Music"))
         {
@@ -169,7 +135,6 @@ public class Dialogues : MonoBehaviour
                 Debug.LogWarning("Audies компонент не найден.");
             }
         }
-
         // Получаем значение переменной "Location" из истории
         int locationValue = (int)_currentStory.variablesState["Location"];
 
@@ -178,10 +143,8 @@ public class Dialogues : MonoBehaviour
         {
             location.ChangeLocation(locationValue);
         }
-
         ChangeCharacterScale(index);
     }
-
     private void ChangeCharacterScale(int indexCharacter)
     {
         if (indexCharacter>=0)
@@ -231,9 +194,10 @@ public class Dialogues : MonoBehaviour
         DialogPlay = false;
         _dialoguePanel.SetActive(false);
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings) // Изменение здесь
+        if (nextSceneIndex<=SceneManager.sceneCount)
         {
             SceneManager.LoadScene(nextSceneIndex);
         }
     }
-    }
+
+}
