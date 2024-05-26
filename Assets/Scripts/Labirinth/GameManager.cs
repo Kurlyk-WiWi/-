@@ -25,6 +25,7 @@ namespace Labirinth
         public GameObject door;
         public Level leveldisiner;
         // Start is called before the first frame update
+        public string rules;
         void Start()
         {
             basic = ""; countstr = 0;
@@ -32,13 +33,21 @@ namespace Labirinth
             func1 = 0; func2 = 0;
             commands = new List <Command>();
             cycle = new List <Command>();
+            string rules ="Цель игры: добраться до двери. Пишите сюда команды для Юрия с помощью кнопок слева.\n" +
+                "Следите за тем, чтобы Юрий не ходил в стены коридора или в баги.\n" +
+                "Юрий пойдёт по заданному маршруту, если нажать кнопку запуск. Чтобы переписать маршрут, используйте кнопку сброс.";
+            str.text= rules;
         }
         public void ClickUp()
         {
             if (incycle)
             {
-                cyclebasic += "        y++; //шаг вверх \n";
+                if (countc == 4) return;
+                if (countc == 3)
+                    cyclebasic += "        y++; //шаг вверх";
+                else cyclebasic += "        y++; //шаг вверх \n";
                 CycleStr.text = cyclebefore + cyclebasic + "    }";
+                countc++;
                 cycle.Add(Command.up);
                 return;
             }
@@ -53,15 +62,19 @@ namespace Labirinth
         {
             if (incycle)
             {
-                cyclebasic += "        y++; //шаг вверх \n";
+                if (countc == 4) return;
+                if (countc == 3)
+                    cyclebasic += "        y++; //шаг вверх ";
+                else cyclebasic += "        y++; //шаг вверх \n";
                 CycleStr.text = cyclebefore + cyclebasic + "    }";
+                countc++;
                 cycle.Add(Command.down);
                 return;
             }
             if (countstr >= maxstr)
             { Maxstrok.SetActive(true); return; }
             countstr++;
-            basic += "    y--; //шаг вниз " + countstr.ToString() + "\n";
+            basic += "    y--; //шаг вниз\n";
             str.text = basic;
             commands.Add(Command.down);
         }
@@ -69,8 +82,12 @@ namespace Labirinth
         {
             if (incycle)
             {
-                cyclebasic += "        y++; //шаг вверх \n";
+                if (countc == 4) return;
+                if (countc == 3)
+                    cyclebasic += "        y++; //шаг вверх ";
+                else cyclebasic += "        y++; //шаг вверх \n";
                 CycleStr.text = cyclebefore + cyclebasic + "    }";
+                countc++;
                 cycle.Add(Command.left);
                 return;
             }
@@ -141,8 +158,15 @@ namespace Labirinth
                 case 4: a = "влево"; break;
                 default: a = "ошибка"; break;
             }
-            basic += "    jump (" + a + ',' + func2.ToString() + "); //прыжок";
             int b=4+(func2-1)*4+func1;
+            if (incycle)
+            {
+                cyclebasic += "    jump (" + a + ',' + func2.ToString() + "); //функция прыжка\n";
+                CycleStr.text = cyclebefore + cyclebasic + "    }";
+                cycle.Add(ToCommand(b));
+                return;
+            }
+            basic += "    jump (" + a + ',' + func2.ToString() + "); //функция прыжка\n";
             commands.Add(ToCommand(b)); 
             str.text = basic;
         }
@@ -176,7 +200,7 @@ namespace Labirinth
         public void AddCycle()
         {
             if (countc <= 1) return;
-            basic += "    " + cyclebefore + cyclebasic + "    }\n";
+            basic += "    " + cyclebefore + cyclebasic + "    }//цикл\n";
             str.text = basic;
             cyclebasic = string.Empty;
             incycle = false;
@@ -186,6 +210,7 @@ namespace Labirinth
                 commands.AddRange(cycle);
             }
             cycle.Clear();
+            countc = 0;
         }
         public void Ok(GameObject x)
         {
