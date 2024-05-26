@@ -10,11 +10,11 @@ namespace Labirinth
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private Human human;
-        public Rigidbody2D player;
+        public BoxCollider2D player;
         public TMP_Text str;
         public TMP_Dropdown countcycle;
         public TMP_Dropdown funcarg1, funcarg2;
-        public Rigidbody2D field;
+        public BoxCollider2D field;
         //текст до введённых игроком команд
         public string basic;
         public int maxstr = 13, maxcode;

@@ -228,12 +228,9 @@ public class Dialogues : MonoBehaviour
     }
     private void ExitDialogue()
     {
+        SceneManager.LoadScene("First"); // Load the "First" scene when the dialogue ends
         DialogPlay = false;
         _dialoguePanel.SetActive(false);
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings) // Изменение здесь
-        {
-            SceneManager.LoadScene(nextSceneIndex);
-        }
+        
     }
-    }
+}

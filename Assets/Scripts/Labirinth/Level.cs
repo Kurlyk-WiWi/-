@@ -38,7 +38,7 @@ namespace Labirinth
         public BoxCollider2D field;
         public float field_place_x, field_place_y;
         public Vector3[] place = new Vector3[16];
-        private float const_z = 3.7f;
+        private float const_z = 20;
         public Rigidbody2D human;
         public int level_numder = 0;
         public bool erasetext=false;

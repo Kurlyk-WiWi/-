@@ -30,6 +30,7 @@ namespace Labirinth
         public Vector2 now;
         public GameObject door;
         public List<GameObject> bags;
+        private bool repeat=false;
         public Human()
         {
             commands = new List<Command>();
@@ -47,7 +48,8 @@ namespace Labirinth
             current = 0;
             Debug.Log(this.commands.Count);
             lift = true; //jumptspeed = multipler * s;
-            now = rb.position;
+            now = rb.transform.position;
+            repeat = true;
         }
         private void FixedUpdate()
         {
@@ -320,6 +322,7 @@ namespace Labirinth
             {
                 win.SetActive(true);
             }
+            else if (commands.Count>0 && repeat) Lose();
         }
         public bool MeetBag(float x, float y)
         {
@@ -338,7 +341,7 @@ namespace Labirinth
             if (win.activeSelf) return;
             lose.SetActive(true);
             current=commands.Count;
-            
+            repeat = false;
         }
     }
 }
