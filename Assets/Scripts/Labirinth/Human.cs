@@ -30,6 +30,7 @@ namespace Labirinth
         public Vector2 now;
         public GameObject door;
         public List<GameObject> bags;
+        private bool repeat=false;
         public Human()
         {
             commands = new List<Command>();
@@ -47,7 +48,8 @@ namespace Labirinth
             current = 0;
             Debug.Log(this.commands.Count);
             lift = true; //jumptspeed = multipler * s;
-            now = rb.position;
+            now = rb.transform.position;
+            repeat = true;
         }
         private void FixedUpdate()
         {
@@ -63,6 +65,7 @@ namespace Labirinth
                 case Command.up:
                     if (now.y >= field.transform.position.y + (field_scale * 3 / 4))
                         Lose();
+                    if (MeetBag(now.y + (field_scale / 2), now.x)) Lose();
                     if (rb.position.y <= now.y + (field_scale / 2))
                         rb.transform.Translate(Vector2.up * s * Time.deltaTime);
                     if (rb.position.y >= now.y + (field_scale / 2))
@@ -70,7 +73,8 @@ namespace Labirinth
                     break;
                 case Command.down:
                     if (now.y < field.transform.position.y - (field_scale*3/4))
-                    { Lose(); } 
+                    { Lose(); }
+                    if (MeetBag(now.y - (field_scale / 2), now.x)) Lose();
                     if (rb.position.y >= now.y - (field_scale / 2))
                         transform.Translate(Vector2.down * s * Time.deltaTime);
                     if (rb.position.y <= now.y - (field_scale / 2))
@@ -79,6 +83,7 @@ namespace Labirinth
                 case Command.right:
                     if (now.x > field.transform.position.x + (field_scale  / 2))
                     { Lose(); }
+                    if (MeetBag(now.y , now.x+ (field_scale / 2))) Lose();
                     if (rb.position.x <= now.x + (field_scale / 2))
                         transform.Translate(Vector2.right * s * Time.deltaTime);
                     if (rb.position.x >= now.x + (field_scale / 2))
@@ -87,6 +92,7 @@ namespace Labirinth
                 case Command.left:
                     if (now.x < field.transform.position.x - (field_scale / 2))
                     { Lose(); }
+                    if (MeetBag(now.y, now.x - (field_scale / 2))) Lose();
                     if (rb.position.x >= now.x - (field_scale / 2))
                         transform.Translate(Vector2.left * s * Time.deltaTime);
                     if (rb.position.x <= now.x - (field_scale / 2))
@@ -95,6 +101,7 @@ namespace Labirinth
                 case Command.jump_1_left:
                     if (now.x <= field.transform.position.x )
                         Lose();
+                    if (MeetBag(now.y, now.x - field_scale)) Lose();
                     if (rb.position.x >= now.x - field_scale)
                             {
                                 transform.Translate(Vector2.left * s * Time.deltaTime);
@@ -118,6 +125,7 @@ namespace Labirinth
                 case Command.jump_1_right:
                     if (now.x >= field.transform.position.x)
                         Lose();
+                    if (MeetBag(now.y, now.x + field_scale)) Lose();
                     if (rb.position.x <= now.x + field_scale)
                     {
                         transform.Translate(Vector2.right * s * Time.deltaTime);
@@ -144,6 +152,7 @@ namespace Labirinth
                 case Command.jump_1_up:
                     if (now.y >= field.transform.position.y)
                         Lose();
+                    if (MeetBag(now.y + field_scale, now.x)) Lose();
                     if (rb.position.y <= now.y + field_scale)
                     {
                         transform.Translate(Vector2.up * s * Time.deltaTime);
@@ -170,6 +179,7 @@ namespace Labirinth
                 case Command.jump_1_down:
                     if (now.y <= field.transform.position.y)
                         Lose();
+                    if (MeetBag(now.y - field_scale, now.x)) Lose();
                     if (rb.position.y >= now.y - field_scale)
                     {
                         transform.Translate(Vector2.down * s * Time.deltaTime);
@@ -196,6 +206,7 @@ namespace Labirinth
                 case Command.jump_2_left:
                     if (now.x < field.transform.position.x+field_scale/2)
                         Lose();
+                    if (MeetBag(now.y, now.x - field_scale*1.5f)) Lose();
                     if (rb.position.x >= now.x - field_scale*1.5)
                     {
                         transform.Translate(Vector2.left * s * Time.deltaTime);
@@ -225,6 +236,7 @@ namespace Labirinth
                 case Command.jump_2_right:
                     if (now.x >= field.transform.position.x - field_scale / 2)
                         Lose();
+                    if (MeetBag(now.y, now.x + field_scale * 1.5f)) Lose();
                     if (rb.position.x <= now.x + field_scale*1.5)
                     {
                         transform.Translate(Vector2.right * s * Time.deltaTime);
@@ -250,6 +262,7 @@ namespace Labirinth
                 case Command.jump_2_up:
                     if (now.y >= field.transform.position.y - field_scale / 2)
                         Lose();
+                    if (MeetBag(now.y + field_scale * 1.5f, now.x)) Lose();
                     if (rb.position.y <= now.y + field_scale * 1.5)
                     {
                         transform.Translate(Vector2.up * s * Time.deltaTime);
@@ -275,6 +288,7 @@ namespace Labirinth
                 case Command.jump_2_down:
                     if (now.y <= field.transform.position.y + field_scale / 2)
                         Lose();
+                    if (MeetBag(now.y - field_scale * 1.5f, now.x)) Lose();
                     if (rb.position.y >= now.y - field_scale * 1.5)
                     {
                         transform.Translate(Vector2.down * s * Time.deltaTime);
@@ -308,6 +322,17 @@ namespace Labirinth
             {
                 win.SetActive(true);
             }
+            else if (commands.Count>0 && repeat) Lose();
+        }
+        public bool MeetBag(float x, float y)
+        {
+            for(int i=0; i<bags.Count; i++)
+            {
+                if (Abs(x - bags[i].transform.position.x) < compare &&
+                    Abs(y - bags[i].transform.position.y) < compare)
+                    return true;
+            }
+            return false;
         }
         public GameObject lose;
         public void Lose()
@@ -316,7 +341,7 @@ namespace Labirinth
             if (win.activeSelf) return;
             lose.SetActive(true);
             current=commands.Count;
-            
+            repeat = false;
         }
     }
 }

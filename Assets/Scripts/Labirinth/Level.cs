@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Labirinth
 {
@@ -11,9 +12,9 @@ namespace Labirinth
         public int[,] levels = new int[5, 16]
         {
             { 1, 1, 0, 0,
-              0, 0, 0, 0,
+              0, 0, 0, 3,
               1, 0, 1, 1,
-              1, 2, 1, 3 },
+              1, 2, 1, 0 },
             { 2, 0, 1, 0,
               1, 0, 0, 1,
               1, 1, 0, 0,
@@ -38,7 +39,7 @@ namespace Labirinth
         public BoxCollider2D field;
         public float field_place_x, field_place_y;
         public Vector3[] place = new Vector3[16];
-        private float const_z = 3.7f;
+        private float const_z = 20;
         public Rigidbody2D human;
         public int level_numder = 0;
         public bool erasetext=false;
@@ -83,6 +84,8 @@ namespace Labirinth
         public void NextLevel(GameObject x)
         {
             x.SetActive(false);
+            if(level_numder+1==5)
+            { SceneManager.LoadScene("Chapter1"); return; }
             Arrangement(human, ++level_numder);
             erasetext = true;
         }

@@ -10,11 +10,11 @@ namespace Labirinth
     public class GameManager : MonoBehaviour
     {
         [SerializeField] private Human human;
-        public Rigidbody2D player;
+        public BoxCollider2D player;
         public TMP_Text str;
         public TMP_Dropdown countcycle;
         public TMP_Dropdown funcarg1, funcarg2;
-        public Rigidbody2D field;
+        public BoxCollider2D field;
         //текст до введённых игроком команд
         public string basic;
         public int maxstr = 13, maxcode;
@@ -189,14 +189,13 @@ namespace Labirinth
         }
         public void Ok(GameObject x)
         {
-            if (x != null) x.SetActive(false);
+            if (x.activeSelf) x.SetActive(false);
         }
-        /*public void Win(GameObject x)
+        public void Func_Ok(GameObject x, Button a)
         {
-            if (human.rb.transform.position != door.transform.position)
-            {
-                x.SetActive(true);
-            }
-        }*/
+            if (x.activeSelf) x.SetActive(false);
+            else
+            { x.SetActive(true); a.interactable = false; }
+        }
     }
 }
