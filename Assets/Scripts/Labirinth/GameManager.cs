@@ -189,14 +189,13 @@ namespace Labirinth
         }
         public void Ok(GameObject x)
         {
-            if (x != null) x.SetActive(false);
+            if (x.activeSelf) x.SetActive(false);
         }
-        /*public void Win(GameObject x)
+        public void Func_Ok(GameObject x, Button a)
         {
-            if (human.rb.transform.position != door.transform.position)
-            {
-                x.SetActive(true);
-            }
-        }*/
+            if (x.activeSelf) x.SetActive(false);
+            else
+            { x.SetActive(true); a.interactable = false; }
+        }
     }
 }
