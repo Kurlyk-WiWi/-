@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using UnityEngine.UI;
 namespace Labirinth
 {
-    public class Level : MonoBehaviour
+    public class Level_1 : MonoBehaviour
     {
         public List<GameObject> sprites = new List<GameObject>();
         public int[,] levels = new int[5, 16]

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Labirinth
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager1 : MonoBehaviour
     {
         [SerializeField] private Human human;
         public BoxCollider2D player;
@@ -23,7 +23,7 @@ namespace Labirinth
         public List <Command> commands;
         public List<Command> cycle;
         public GameObject door;
-        public Level leveldisiner;
+        public Level_1 leveldisiner;
         // Start is called before the first frame update
         public string rules;
         void Start()

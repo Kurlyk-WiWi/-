@@ -238,7 +238,7 @@ public class Dialogues : MonoBehaviour
     {
         if (_currentStory.variablesState.Contains("sceneState") && (int)_currentStory.variablesState["sceneState"] == 1)
         {
-            SceneManager.LoadScene("Лабиринт"); // Load the "Лабиринт" scene
+            SceneManager.LoadScene("Labirinth"); // Load the "Лабиринт" scene
         }
     }
 }

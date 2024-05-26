@@ -342,8 +342,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ClickUp
         m_Mode: 1
         m_Arguments:
@@ -1234,8 +1234,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ClickStart
         m_Mode: 1
         m_Arguments:
@@ -1640,8 +1640,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ClickReset
         m_Mode: 1
         m_Arguments:
@@ -1773,8 +1773,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ClickDown
         m_Mode: 1
         m_Arguments:
@@ -2388,8 +2388,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ClickFunc
         m_Mode: 1
         m_Arguments:
@@ -3120,25 +3120,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1357702810}
-        m_TargetAssemblyTypeName: Labirinth.Level, Assembly-CSharp
-        m_MethodName: NextLevel
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 1373786487}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: Labirinth.GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ClickReset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1357702810}
+        m_TargetAssemblyTypeName: Labirinth.Level_1, Assembly-CSharp
+        m_MethodName: NextLevel
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1373786487}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3349,8 +3349,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: AddCycle
         m_Mode: 1
         m_Arguments:
@@ -3862,8 +3862,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ChangeScrollCycle
         m_Mode: 1
         m_Arguments:
@@ -4281,8 +4281,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ChangeScrollFunc2
         m_Mode: 1
         m_Arguments:
@@ -7098,7 +7098,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299654825}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b393483251ffdce46b90d242557676cc, type: 3}
   m_Name: 
@@ -7111,7 +7111,7 @@ MonoBehaviour:
   funcarg2: {fileID: 0}
   field: {fileID: 0}
   basic: 
-  maxstr: 14
+  maxstr: 13
   maxcode: 0
   countstr: 0
   countc: 0
@@ -7122,7 +7122,7 @@ MonoBehaviour:
   door: {fileID: 0}
   leveldisiner: {fileID: 0}
   rules: 
-  Maxstrok: {fileID: 456446355}
+  Maxstrok: {fileID: 0}
   Cycle: {fileID: 0}
   CycleStr: {fileID: 0}
   cyclebefore: 
@@ -7172,25 +7172,25 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1357702810}
-        m_TargetAssemblyTypeName: Labirinth.Level, Assembly-CSharp
-        m_MethodName: Restart
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 456446355}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: Labirinth.GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ClickReset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1357702810}
+        m_TargetAssemblyTypeName: Labirinth.Level_1, Assembly-CSharp
+        m_MethodName: Restart
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 456446355}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -8057,16 +8057,16 @@ MonoBehaviour:
   - {fileID: 1851294478}
   - {fileID: 391552404}
   - {fileID: 991930812}
-  - {fileID: 1292456288}
   - {fileID: 543896475}
+  - {fileID: 1292456288}
   - {fileID: 1404360848}
   - {fileID: 1769717852}
   number: 0
   current: 0
   human_number: 8
-  field_scale: 281.2678
+  field_scale: 0
   field: {fileID: 279589448}
-  field_place_x: -657
+  field_place_x: 0
   field_place_y: 0
   place:
   - {x: 0, y: 0, z: 0}
@@ -8681,8 +8681,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1437655120}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: Ok
         m_Mode: 2
         m_Arguments:
@@ -8751,7 +8751,7 @@ MonoBehaviour:
   funcarg2: {fileID: 0}
   field: {fileID: 0}
   basic: 
-  maxstr: 14
+  maxstr: 13
   maxcode: 0
   countstr: 0
   countc: 0
@@ -8762,7 +8762,7 @@ MonoBehaviour:
   door: {fileID: 0}
   leveldisiner: {fileID: 0}
   rules: 
-  Maxstrok: {fileID: 1433846873}
+  Maxstrok: {fileID: 0}
   Cycle: {fileID: 0}
   CycleStr: {fileID: 0}
   cyclebefore: 
@@ -10146,8 +10146,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ClickLeft
         m_Mode: 1
         m_Arguments:
@@ -10279,8 +10279,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ClickRight
         m_Mode: 1
         m_Arguments:
@@ -10414,8 +10414,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ClickCycle
         m_Mode: 1
         m_Arguments:
@@ -11359,15 +11359,30 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2013594311}
-  - component: {fileID: 2013594310}
+  - component: {fileID: 2013594312}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Gamemanager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2013594310
+--- !u!4 &2013594311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013594309}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 158.31233, y: 89.28586, z: 295.574}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2013594312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11387,7 +11402,7 @@ MonoBehaviour:
   funcarg2: {fileID: 790810297}
   field: {fileID: 279589448}
   basic: 
-  maxstr: 14
+  maxstr: 13
   maxcode: 0
   countstr: 0
   countc: 0
@@ -11404,21 +11419,6 @@ MonoBehaviour:
   cyclebefore: 
   cyclebasic: 
   incycle: 0
---- !u!4 &2013594311
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2013594309}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 158.31233, y: 89.28586, z: 295.574}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2029504270
 GameObject:
   m_ObjectHideFlags: 0
@@ -11891,8 +11891,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2013594310}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+      - m_Target: {fileID: 2013594312}
+        m_TargetAssemblyTypeName: Labirinth.GameManager1, Assembly-CSharp
         m_MethodName: ChangeScrollFunc1
         m_Mode: 1
         m_Arguments:
