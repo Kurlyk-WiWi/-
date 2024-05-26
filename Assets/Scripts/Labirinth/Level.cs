@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Labirinth
 {
@@ -83,6 +84,8 @@ namespace Labirinth
         public void NextLevel(GameObject x)
         {
             x.SetActive(false);
+            if(level_numder+1==5)
+            { SceneManager.LoadScene("Chapter1"); return; }
             Arrangement(human, ++level_numder);
             erasetext = true;
         }
