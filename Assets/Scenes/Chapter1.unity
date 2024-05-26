@@ -3669,6 +3669,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: fb07f348eafd4e94bab066024f916c84, type: 3}
   - {fileID: 21300000, guid: 5197c7b2b6e38294399e965a97db67a0, type: 3}
   - {fileID: 21300000, guid: 12fec71d33e2b6b458744ef30e542a37, type: 3}
+  - {fileID: 21300000, guid: 4c04c7ce752aa3849a0e7be3fe68ec99, type: 3}
 --- !u!82 &1886591242
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3779,8 +3780,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audies:
   - {fileID: 8300000, guid: 0b6de53a68ac0cd4184c2765ec205754, type: 3}
-  - {fileID: 8300000, guid: c26141a9e2a4a0e4ea03d7500244b280, type: 3}
+  - {fileID: 8300000, guid: 7b8467318b11d7243af60c00b4e27bb0, type: 3}
+  - {fileID: 8300000, guid: f75533747687c244da0b4363d822e57f, type: 3}
   - {fileID: 8300000, guid: 0e0ea6234df70314f960875875017ce1, type: 3}
+  - {fileID: 8300000, guid: 323173c12d6897b4aa40b69919c689b8, type: 3}
+  - {fileID: 8300000, guid: 42428484363095f4a80b959637cd69d5, type: 3}
+  - {fileID: 8300000, guid: 07ddb723b41d5b74995ae5a84e744a03, type: 3}
 --- !u!225 &1886591244
 CanvasGroup:
   m_ObjectHideFlags: 0

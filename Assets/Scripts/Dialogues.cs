@@ -73,6 +73,7 @@ public class Dialogues : MonoBehaviour
             }
             ShowDialogue();
             ShowChoiceButtons();
+            CheckSceneState();
         }
         else if (!choiceBefore)
         {
@@ -232,5 +233,12 @@ public class Dialogues : MonoBehaviour
         DialogPlay = false;
         _dialoguePanel.SetActive(false);
         
+    }
+    private void CheckSceneState()
+    {
+        if (_currentStory.variablesState.Contains("sceneState") && (int)_currentStory.variablesState["sceneState"] == 1)
+        {
+            SceneManager.LoadScene("Лабиринт"); // Load the "Лабиринт" scene
+        }
     }
 }
