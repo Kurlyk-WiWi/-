@@ -320,7 +320,7 @@ namespace Labirinth
             if (Abs(rb.transform.position.x - door.transform.position.x) < compare &&
                 Abs(rb.transform.position.y - door.transform.position.y) < compare)
             {
-                win.SetActive(true);
+                win.SetActive(true); repeat = false;
             }
             else if (commands.Count>0 && repeat) Lose();
         }
