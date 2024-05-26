@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - panel
+  - 
   - Water
   - UI
   - 
@@ -41,14 +41,17 @@ TagManager:
   - name: Background
     uniqueID: 2841320103
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: field
+    uniqueID: 3500282369
     locked: 0
   - name: Door
     uniqueID: 3352177093
     locked: 0
   - name: Human
     uniqueID: 550565763
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: panel
     uniqueID: 3908052703

@@ -43,6 +43,8 @@ namespace Labirinth
         public Rigidbody2D human;
         public int level_numder = 0;
         public bool erasetext=false;
+        public GameObject cycle;
+        public GameObject func;
         public void Start()
         {
             field_place_x = field.transform.position.x;
@@ -87,6 +89,8 @@ namespace Labirinth
             if(level_numder+1==5)
             { SceneManager.LoadScene("Chapter1"); return; }
             Arrangement(human, ++level_numder);
+            if(level_numder==1) cycle.SetActive(true);
+            if(level_numder==2) func.SetActive(true);
             erasetext = true;
         }
         public void Restart (GameObject x)
