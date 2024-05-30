@@ -27,6 +27,8 @@ public class Dialogues : MonoBehaviour
     private Stack<(int, string)> _dialogueHistory = new Stack<(int, string)>();
     public float typingSpeed = 0.1f; // Скорость появления текста по буквам
     public bool DialogPlay { get; private set; }
+    private bool isTyping = false; // Флаг для отслеживания процесса печати текста
+
     [Inject]
     public void Construct(DialoguesInstaller dialoguesInstaller)
     {
@@ -37,11 +39,13 @@ public class Dialogues : MonoBehaviour
         _choiceButtonsPanel = dialoguesInstaller.choiceButtonsPanel;
         _choiceButton = dialoguesInstaller.choiceButton;
     }
+
     private void Awake()
     {
         _currentStory = new Story(_inkJson.text);
         audies = FindObjectOfType<Audies>();
     }
+
     void Start()
     {
         foreach (var character in FindObjectsOfType<Character>())
@@ -53,31 +57,41 @@ public class Dialogues : MonoBehaviour
             locations.Add(location);
         }
         StartDialogue();
-
     }
-    public  void StartDialogue()
+
+    public void StartDialogue()
     {
         DialogPlay = true;
         _dialoguePanel.SetActive(true);
         ContinueStory();
     }
+
     public void ContinueStory(bool choiceBefore = false)
     {
-        if (_currentStory.canContinue)
+        if (isTyping)
         {
-            string currentDialogueState = _currentStory.state.ToJson();
-            if (!choiceBefore)
-            {
-                int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-                _dialogueHistory.Push((currentSceneIndex, currentDialogueState)); // Сохранять состояние истории с индексом сцены
-            }
-            ShowDialogue();
-            ShowChoiceButtons();
-            CheckSceneState();
+            // Если текст печатается, завершить печать
+            StopAllCoroutines();
+            _dialogueText.text = _currentStory.currentText; // Показать весь текст сразу
+            isTyping = false;
         }
-        else if (!choiceBefore)
+        else
         {
-            ExitDialogue();
+            if (_currentStory.canContinue)
+            {
+                string currentDialogueState = _currentStory.state.ToJson();
+                if (!choiceBefore)
+                {
+                    int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+                    _dialogueHistory.Push((currentSceneIndex, currentDialogueState)); // Сохранить состояние диалога с индексом сцены
+                }
+                ShowDialogue();
+                ShowChoiceButtons();
+            }
+            else if (!choiceBefore)
+            {
+                ExitDialogue();
+            }
         }
     }
 
@@ -104,6 +118,7 @@ public class Dialogues : MonoBehaviour
             Debug.Log("Нельзя вернуться назад.");
         }
     }
+
     private IEnumerator RestoreDialogueState(string state)
     {
         yield return null; // Подождать один кадр для завершения загрузки сцены
@@ -112,16 +127,18 @@ public class Dialogues : MonoBehaviour
         ShowChoiceButtons();
     }
 
-    
     private IEnumerator TypeSentence(string sentence)
     {
+        isTyping = true; // Установить флаг печати текста
         _dialogueText.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
             _dialogueText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
+        isTyping = false; // Снять флаг после завершения печати текста
     }
+
     private void ShowDialogue()
     {
         string dialogueLine = _currentStory.Continue();
@@ -138,22 +155,25 @@ public class Dialogues : MonoBehaviour
         }
 
         var index = characters.FindIndex(character => character.characterName.Contains(_nameText.text));
-        characters[index].ChangeEmotion((int)_currentStory.variablesState["characterExpression"]);
-
-        // Process tags
-        foreach (string tag in _currentStory.currentTags)
+        if (index >= 0)
         {
-            // Check for switchExpression tag
-            if (tag.StartsWith("switchExpression:"))
-            {
-                var parts = tag.Split(':');
-                if (parts.Length > 1 && int.TryParse(parts[1], out int switchState))
-                {
-                    characters[index].SetExpressionState(switchState);
-                }
-            }
+            characters[index].ChangeEmotion((int)_currentStory.variablesState["characterExpression"]);
 
-            // Check for other tags if needed
+            // Process tags
+            foreach (string tag in _currentStory.currentTags)
+            {
+                // Check for switchExpression tag
+                if (tag.StartsWith("switchExpression:"))
+                {
+                    var parts = tag.Split(':');
+                    if (parts.Length > 1 && int.TryParse(parts[1], out int switchState))
+                    {
+                        characters[index].SetExpressionState(switchState);
+                    }
+                }
+
+                // Check for other tags if needed
+            }
         }
 
         // Получаем значение переменной "Music" из истории и воспроизводим соответствующий трек
@@ -180,20 +200,21 @@ public class Dialogues : MonoBehaviour
             location.ChangeLocation(locationValue);
         }
 
-        ChangeCharacterScale(index);
+        int characterIndex = characters.FindIndex(character => character.characterName.Contains(_nameText.text));
+        ChangeCharacterScale(characterIndex);
     }
 
     private void ChangeCharacterScale(int indexCharacter)
     {
-        if (indexCharacter>=0)
+        if (indexCharacter >= 0)
         {
             foreach (var character in characters)
             {
-                if (character!=characters[indexCharacter])
+                if (character != characters[indexCharacter])
                 {
                     character.ResetScale();
                 }
-                else if(character.DefaultScale == character.transform.localScale)
+                else if (character.DefaultScale == character.transform.localScale)
                 {
                     character.ChangeScale(multiplier);
                 }
@@ -204,13 +225,15 @@ public class Dialogues : MonoBehaviour
             characters.ForEach(character => character.ResetScale());
         }
     }
+
     private void ShowChoiceButtons()
     {
+
         List<Choice> currentChoices = _currentStory.currentChoices;
         _choiceButtonsPanel.SetActive(currentChoices.Count != 0);
-        if (currentChoices.Count<=0){return;}
+        if (currentChoices.Count <= 0) { Debug.LogWarning("Так незя."); return; }
         _choiceButtonsPanel.transform.Cast<Transform>().ToList().ForEach(child => Destroy(child.gameObject));
-        _choicesText.Clear();
+        _choicesText.Clear(); 
         for (int i = 0; i < currentChoices.Count; i++)
         {
             GameObject choice = Instantiate(_choiceButton);
@@ -222,23 +245,17 @@ public class Dialogues : MonoBehaviour
             _choicesText.Add(choiceText);
         }
     }
+
     public void ChoiceButtonAction(int choiceIndex)
     {
         _currentStory.ChooseChoiceIndex(choiceIndex);
         ContinueStory(true);
     }
+
     private void ExitDialogue()
     {
-        SceneManager.LoadScene("First"); // Load the "First" scene when the dialogue ends
+        SceneManager.LoadScene("Labirinth"); // Load the "First" scene when the dialogue ends
         DialogPlay = false;
         _dialoguePanel.SetActive(false);
-        
-    }
-    private void CheckSceneState()
-    {
-        if (_currentStory.variablesState.Contains("sceneState") && (int)_currentStory.variablesState["sceneState"] == 1)
-        {
-            SceneManager.LoadScene("Labirinth"); // Load the "Лабиринт" scene
-        }
     }
 }

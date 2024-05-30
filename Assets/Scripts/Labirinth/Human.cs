@@ -39,8 +39,7 @@ namespace Labirinth
         }
         public void Start()
         {
-            field_scale = field.transform.localScale.x*1.305f;
-        }
+            field_scale = field.transform.localScale.x*1.305f;        }
         public void SetCommands(List <Command> commands)
         {
             this.commands = commands.ToList();
@@ -63,16 +62,16 @@ namespace Labirinth
                     current++;
                     break;
                 case Command.up:
-                    if (now.y >= field.transform.position.y + (field_scale * 3 / 4))
+                    if (rb.position.y >= field.transform.position.y + (field_scale * 7 / 8))
                         Lose();
                     if (MeetBag(now.y + (field_scale / 2), now.x)) Lose();
                     if (rb.position.y <= now.y + (field_scale / 2))
                         rb.transform.Translate(Vector2.up * s * Time.deltaTime);
                     if (rb.position.y >= now.y + (field_scale / 2))
-                    { now = rb.position; current++;}
+                    { now = rb.position; current++; }
                     break;
                 case Command.down:
-                    if (now.y < field.transform.position.y - (field_scale*3/4))
+                    if (rb.position.y < field.transform.position.y - (field_scale * 7 / 8))
                     { Lose(); }
                     if (MeetBag(now.y - (field_scale / 2), now.x)) Lose();
                     if (rb.position.y >= now.y - (field_scale / 2))
@@ -81,16 +80,16 @@ namespace Labirinth
                     { now = rb.position; current++; }
                     break;
                 case Command.right:
-                    if (now.x > field.transform.position.x + (field_scale  / 2))
-                    { Lose(); }
-                    if (MeetBag(now.y , now.x+ (field_scale / 2))) Lose();
+                    if (rb.position.x > field.transform.position.x + (field_scale *7/ 8))
+                    { Lose(); Debug.Log("вышел за карту"); }
+                    if (MeetBag(now.y, now.x + (field_scale / 2))){ Lose(); Debug.Log("встретил баг"); }
                     if (rb.position.x <= now.x + (field_scale / 2))
                         transform.Translate(Vector2.right * s * Time.deltaTime);
                     if (rb.position.x >= now.x + (field_scale / 2))
                     { now = rb.position; current++; }
                     break;
                 case Command.left:
-                    if (now.x < field.transform.position.x - (field_scale / 2))
+                    if (rb.position.x < field.transform.position.x - (field_scale * 7 / 8))
                     { Lose(); }
                     if (MeetBag(now.y, now.x - (field_scale / 2))) Lose();
                     if (rb.position.x >= now.x - (field_scale / 2))

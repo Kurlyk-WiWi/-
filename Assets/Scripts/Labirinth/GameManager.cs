@@ -18,7 +18,7 @@ namespace Labirinth
         //текст до введённых игроком команд
         public string basic;
         public int maxstr = 13, maxcode;
-        public int countstr, countc;
+        public int countstr, countc, countcstr;
         public int func1, func2;
         public List <Command> commands;
         public List<Command> cycle;
@@ -29,7 +29,7 @@ namespace Labirinth
         void Start()
         {
             basic = ""; countstr = 0;
-            countc = 0; 
+            countc = 0; countcstr = 0; 
             func1 = 0; func2 = 0;
             commands = new List <Command>();
             cycle = new List <Command>();
@@ -42,12 +42,12 @@ namespace Labirinth
         {
             if (incycle)
             {
-                if (countc == 4) return;
-                if (countc == 3)
+                if (countcstr == 4) return;
+                if (countcstr == 3)
                     cyclebasic += "        y++; //шаг вверх";
                 else cyclebasic += "        y++; //шаг вверх \n";
                 CycleStr.text = cyclebefore + cyclebasic + "    }";
-                countc++;
+                countcstr++;
                 cycle.Add(Command.up);
                 return;
             }
@@ -62,12 +62,12 @@ namespace Labirinth
         {
             if (incycle)
             {
-                if (countc == 4) return;
-                if (countc == 3)
+                if (countcstr == 4) return;
+                if (countcstr == 3)
                     cyclebasic += "        y++; //шаг вверх ";
                 else cyclebasic += "        y++; //шаг вверх \n";
                 CycleStr.text = cyclebefore + cyclebasic + "    }";
-                countc++;
+                countcstr++;
                 cycle.Add(Command.down);
                 return;
             }
@@ -82,12 +82,12 @@ namespace Labirinth
         {
             if (incycle)
             {
-                if (countc == 4) return;
-                if (countc == 3)
+                if (countcstr == 4) return;
+                if (countcstr == 3)
                     cyclebasic += "        y++; //шаг вверх ";
                 else cyclebasic += "        y++; //шаг вверх \n";
                 CycleStr.text = cyclebefore + cyclebasic + "    }";
-                countc++;
+                countcstr++;
                 cycle.Add(Command.left);
                 return;
             }
@@ -104,9 +104,13 @@ namespace Labirinth
         {
             if (incycle)
             {
-                cyclebasic += "        y++; //шаг вверх \n";
+                if (countcstr == 4) return;
+                if (countcstr == 3)
+                    cyclebasic += "        y++; //шаг вверх";
+                else cyclebasic += "        y++; //шаг вверх \n";
                 CycleStr.text = cyclebefore + cyclebasic + "    }";
                 cycle.Add(Command.right);
+                countcstr++;
                 return;
             }
             if (countstr >= maxstr)
@@ -122,6 +126,7 @@ namespace Labirinth
         {
             if (incycle) return;
             countstr = 0;
+            countc = 0; countcstr = 0;
             basic = string.Empty;
             str.text = basic;
             Debug.Log("заново");
@@ -199,7 +204,7 @@ namespace Labirinth
         }
         public void AddCycle()
         {
-            if (countc <= 1) return;
+            if (countc <= 1 || countcstr==0) return;
             basic += "    " + cyclebefore + cyclebasic + "    }//цикл\n";
             str.text = basic;
             cyclebasic = string.Empty;
@@ -210,7 +215,7 @@ namespace Labirinth
                 commands.AddRange(cycle);
             }
             cycle.Clear();
-            countc = 0;
+            countc = 0; countcstr = 0;
         }
         public void Ok(GameObject x)
         {

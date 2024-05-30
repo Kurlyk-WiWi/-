@@ -2321,7 +2321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &514755768
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4626,7 +4626,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u043D\u0430\u0437\u0430\u0434\n"
+  m_text: "\u0432\u043D\u0438\u0437\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -7115,6 +7115,7 @@ MonoBehaviour:
   maxcode: 0
   countstr: 0
   countc: 0
+  countcstr: 0
   func1: 0
   func2: 0
   commands: 
@@ -7797,7 +7798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0432\u043F\u0435\u0440\u0451\u0434"
+  m_text: "\u0432\u0432\u0435\u0440\u0445"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -8051,6 +8052,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ffc8083b144c74cb83fa6326bc8f8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  novel: {fileID: 0}
+  game: {fileID: 0}
   sprites:
   - {fileID: 793332538}
   - {fileID: 1776111092}
@@ -8755,6 +8758,7 @@ MonoBehaviour:
   maxcode: 0
   countstr: 0
   countc: 0
+  countcstr: 0
   func1: 0
   func2: 0
   commands: 
@@ -11406,6 +11410,7 @@ MonoBehaviour:
   maxcode: 0
   countstr: 0
   countc: 0
+  countcstr: 0
   func1: 0
   func2: 0
   commands: 

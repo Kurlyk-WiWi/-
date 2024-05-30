@@ -8,6 +8,8 @@ namespace Labirinth
 {
     public class Level_1 : MonoBehaviour
     {
+        [SerializeField] private GameObject novel;
+        [SerializeField] private GameObject game;
         public List<GameObject> sprites = new List<GameObject>();
         public int[,] levels = new int[5, 16]
         {
@@ -21,14 +23,14 @@ namespace Labirinth
               1, 0, 1, 3 },
             { 0, 1, 0, 0,
               0, 1, 1, 1,
-              2, 1, 0, 3,
-              0, 0, 1, 0 },
-            { 2, 0, 1, 0,
+              2, 0, 1, 3,
+              1, 0, 1, 0 },
+            { 2, 1, 1, 0,
               0, 1, 0, 0,
               0, 1, 1, 0,
-              0, 0, 1, 3 },
-            { 0, 0, 1, 0,
-              1, 0, 0, 2,
+              0, 1, 1, 3 },
+            { 3, 0, 1, 0,
+              1, 0, 1, 2,
               1, 0, 1, 1,
               1, 0, 1, 0 }
         };
@@ -87,7 +89,10 @@ namespace Labirinth
         {
             x.SetActive(false);
             if(level_numder+1==5)
-            { SceneManager.LoadScene("Chapter1"); return; }
+            { /*game.SetActive(false);
+              novel.SetActive(true)*/;
+                SceneManager.LoadScene("First");
+                return; }
             Arrangement(human, ++level_numder);
             if(level_numder==1) cycle.SetActive(true);
             if(level_numder==2) func.SetActive(true);

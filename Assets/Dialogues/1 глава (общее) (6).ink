@@ -2,7 +2,8 @@ VAR characterName = "Юрий"
 VAR characterExpression = 0
 VAR Location = 0
 VAR Music = 0
-VAR sceneState=0
+VAR sceneState = 0
+
 ~characterName= "Юрий"
 ~characterExpression = 1
 ~Music = 0
@@ -165,10 +166,9 @@ VAR sceneState=0
 
 ~characterName="Рассказчик"
 ~characterExpression = 0
-// Изменение состояния
--> Лабиринт
-=== Лабиринт ===
 ~sceneState = 1
+
+
 
 ~characterName="Юрий"
 ~Location = 2
